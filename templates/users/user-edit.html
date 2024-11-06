@@ -1,0 +1,93 @@
+{% extends 'employee/index.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Edit Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/edit_profile_post" method="post" enctype="multipart/form-data" name="form1" id="form1">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="profile_name" value="{{ profile.name }}" /></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" name="file" /></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="phone" value="{{ profile.phone }}" /></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" value="{{ profile.email }}" /></td>
+                </tr>
+
+                <tr>
+                    <td>Date Of Birth</td>
+                    <td><input type="date" name="dob" value="{{ profile.dob|date:'Y-m-d' }}" max="2010-01-01"/></td>
+                </tr>
+            </table>
+            <p><input type="submit" name="submit" value="Update" /></p>
+        </form>
+    </div>
+</body>
+{% endblock %}

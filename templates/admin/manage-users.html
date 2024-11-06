@@ -1,0 +1,85 @@
+{% extends 'admin/adminhome1.html' %}
+
+{% block body %}
+    <div class="container">
+        <!-- Section Title -->
+        <div class="container section-title text-center" data-aos="fade-up">
+            <h2>Users</h2>
+            <p></p>
+        </div>
+
+        <br><br>
+
+        <!-- User Cards -->
+        <div class="row gy-4">
+            {% for i in val %}
+                <div class="col-md-4"> <!-- 3 columns per row on medium screens -->
+                    <div class="card border-0 rounded shadow">
+                        <div class="card-body text-center">
+                            <img src="{{ i.photo.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h4 class="card-title"><b>{{ i.name }}</b></h4>
+                            <p class="card-text"><strong>Phone:</strong> {{ i.phone }}</p>
+                            <p class="card-text"><strong>Gender:</strong> {{ i.gender }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ i.email }}</p>
+                            <p class="card-text"><strong>Date of Birth:</strong> {{ i.dob }}</p>
+                            <div class="d-flex justify-content-center">
+                                {% if i.LOGINID.type == 'user' %}
+                                    <a href="/block_user/{{ i.LOGINID.id }}" class="btn btn-transparent btn-sm mx-2 block-user-btn">Block</a>
+                                {% else %}
+                                    <a href="/unblock_user/{{ i.LOGINID.id }}" class="btn btn-transparent btn-sm mx-2 unblock-user-btn">Unblock</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        /* General button styling */
+        .btn {
+            padding: 5px 10px; /* Smaller padding for buttons */
+            font-size: 0.9rem; /* Smaller font size */
+            background-color: transparent; /* Make the button transparent */
+            border: 2px solid transparent; /* Transparent border */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+        }
+
+        /* Block User button */
+        .block-user-btn {
+            color: #e74c3c; /* Red color for text */
+            border-color: #e74c3c; /* Red border */
+        }
+        .block-user-btn:hover {
+            background-color: #e74c3c; /* Change background color to red on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Unblock User button */
+        .unblock-user-btn {
+            color: #28a745; /* Green color for text */
+            border-color: #28a745; /* Green border */
+        }
+        .unblock-user-btn:hover {
+            background-color: #28a745; /* Change background color to green on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Styling for User Cards */
+        .card {
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+        .card-body img {
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card-body img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+{% endblock %}

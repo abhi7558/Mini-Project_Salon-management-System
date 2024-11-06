@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <style>
+        /* Full-page background image with overlay */
+        body {
+            background-image: url('/static/img/pay.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            height: 100vh;
+        }
+
+        /* Dark overlay to improve readability */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: 1;
+        }
+
+        /* Center container styling */
+        .container {
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header styling */
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Booking details */
+        .mb-4 p {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 10px;
+        }
+
+        /* Button styling */
+        .btn {
+            width: 150px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            border: 2px solid #28a745;
+            background-color: transparent;
+            color: #28a745;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        /* Center form on page */
+        .page-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            z-index: 2;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-center">
+    <form action="/confirm_page" method="post">
+        <div class="container text-center">
+            <h2>Payment Details</h2>
+            <hr>
+
+            <!-- Booking Details -->
+            <div class="mb-4">
+                <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+                <p><strong>User:</strong> {{ booking.USER.name }}</p>
+                <p><strong>Booking Date:</strong> {{ booking.date }}</p>
+                <p><strong>Total Amount:</strong> ₹{{ booking.amount }}</p>
+            </div>
+
+            <!-- Payment Buttons -->
+            <div class="text-center">
+                <input type="submit" name="btn" value="Pay Full" class="btn mr-3">
+                <input type="submit" name="btn" value="Pay Booking(₹100)" class="btn">
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

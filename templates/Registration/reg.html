@@ -1,0 +1,232 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../static/registration/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../static/registration/vendor/nouislider/nouislider.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/registration/css/style.css">
+    <style>
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+  padding: 10px 0;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  margin-right: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffcc00;
+}
+
+.bold-text {
+  font-size: 30px;
+  color: #e4e862;
+  margin-left: 40px; /* Move to the right, equivalent to 4 spaces */
+}
+
+.highlight-text {
+    font-size: 30px;
+    color: #f5f6d9;
+}
+
+.container-fluid {
+  width: 100%;
+}
+.conta{
+    width: 1400px;
+    margin: auto;
+}
+
+h1 {
+  margin: 0;
+}
+
+
+
+body {
+    background-image: url('../static/registration/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container-fluid">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-md-6 col-lg-4">
+        <h1>
+          <span class="bold-text">H</span><span class="highlight-text">L</span><span>.</span>
+        </h1>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+    <div class="main">
+        <div class="conta">
+                <div class="signup-form">
+                    <form action="/registration_post" method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+                        {% if message %}
+        <script>
+            toastr.success('Registration Successful! Redirecting to login...');
+            setTimeout(function() {
+                window.location.href = '/login';
+            }, 3000);
+        </script>
+    {% endif %}
+
+    {% if already %}
+        <script>
+            toastr.error('Username Already Exists');
+            setTimeout(function() {
+                window.location.href = '/login';
+            }, 3000);
+        </script>
+    {% endif %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="form-input">
+                                    <br/>
+                                    <label for="First_name" class="required">
+                                        NAME</label>
+                                    <input type="text" name="first_name" id="first_name"  required pattern="[A-Z a-z.]{3,25}" title="Only characters"/>
+                                </div>
+                                <div class="form-input">
+
+                                    <label for="image" class="required">Image</label>
+                                    <input type="file" name="file" id="last_name" required accept="image/*"  />
+                                </div>
+                                <div class="form-input">
+                                    <label for="DOB" class="required">Date Of Birth</label>
+                                    <input type="date" name="dob" id="dob" required  max="2010-01-01"/>
+                                </div>
+                                <div class="form-input"><br/>
+                                    <label for="email" class="required">Email</label>
+                                    <input type="email" name="email" id="email" required pattern="[a-z0-9._]+[@][a-z]+[.][a-z]+" title="sample@domail.com" />
+                                </div>
+                                <div class="form-input">
+                                    <br/>
+                                    <label for="phone_number" class="required">Phone number</label>
+                                    <input type="number" name="phone_number" id="phone_number" required pattern="[6789][0-9]{9}" title="start with 9,8,7,6 and 10 characters" />
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-select">
+
+
+
+                                </div>
+                                <div class="form-radio">
+                                    <div class="label-flex">
+                                        <label for="payment">Gender</label>
+
+                                    </div>
+                                    <div class="form-radio-group">
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="gen" id="cash"  value="male" required>
+                                            <label for="cash">Male</label>
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="gen" value="female" id="cheque">
+                                            <label for="cheque">Female</label>
+                                            <span class="check"></span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-input">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <label for="password" class="required">Password</label>
+                                    <input type="password" name="password" id="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
+
+                                </div>
+                                <div class="form-input">
+                                    <label for="conpassword" class="required">Confirm Password</label>
+                                    <input type="password" name="conpassword" id="conpassword" onkeyup="conpass()" /><h1 id="msg"></h1>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-submit">
+                            <input type="submit" value="Submit" class="submit" id="submit" name="submit" />
+                            <input type="submit" value="Reset" class="submit" id="reset" name="reset" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../static/registration/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/registration/vendor/nouislider/nouislider.min.js"></script>
+    <script src="../static/registration/vendor/wnumb/wNumb.js"></script>
+    <script src="../static/registration/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="../static/registration/vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="../static/registration/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<script>
+    function conpass() {
+        var p1=document.getElementById("password").value;
+        var p2=document.getElementById("conpassword").value;
+
+        if (p1==p2){
+            document.getElementById("msg").innerHTML="Password must be similar"
+             document.getElementById('submit').style.visibility = 'visible';
+        }
+        else {
+             document.getElementById('submit').style.visibility = 'hidden';
+             document.getElementById('msg').style.visibility = 'hidden';
+        }
+
+    }
+</script>

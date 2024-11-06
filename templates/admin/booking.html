@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 1rem;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .booking-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .booking-table th, .booking-table td {
+            padding: 15px;
+            text-align: left;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+        .booking-table th {
+            background-color: #333;
+            color: #fff;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 12px;
+            color: #fff;
+        }
+        .status.completed {
+            background-color: #28a745;
+        }
+        .status.pending {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking History</h1>
+<a href="/adminhome" class="btn btn-info" >Back</a>
+    <br/>
+    <br/>
+        <!-- Search Bar -->
+        <form method="post" action="/searchbookingadmin" class="search-bar">
+            <input type="date" name="date" class="form-control" placeholder="Search by Date" value="{{ d }}">
+            <input type="text" name="employee_name" class="form-control" placeholder="Search by Employee Name" value="{{ en }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- Table Container -->
+        <div class="table-container">
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>User Photo</th>
+                        <th>User Name</th>
+                        <th>Employee Photo</th>
+                        <th>Employee Name</th>
+                        <th>Services</th>
+                        <th>Date</th>
+                        <th>Time Slot</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in val %}
+                        <tr>
+                            <td>{{ booking.booking_id }}</td>
+                            <td>
+                                {% if booking.user_photo %}
+                                    <img src="{{ booking.user_photo }}" alt="User Photo" class="profile-pic">
+                                {% else %}
+                                    No Photo
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.user_name }}</td>
+                            <td>
+                                {% if booking.employee_photo %}
+                                    <img src="{{ booking.employee_photo }}" alt="Employee Photo" class="profile-pic">
+                                {% else %}
+                                    No Photo
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.employee_name }}</td>
+                            <td>
+                                <table>
+                                    {% for service in booking.services %}
+                                        <tr>
+                                            <td>
+                                                {% if service.img %}
+                                                    <img src="{{ service.img }}" alt="Service Photo" class="profile-pic">
+                                                {% else %}
+                                                    No Image
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ service.sn }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.from_time }} To {{ booking.to_time }}</td>
+                            <td>{{ booking.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

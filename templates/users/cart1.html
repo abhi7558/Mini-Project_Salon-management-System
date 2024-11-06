@@ -1,0 +1,510 @@
+{% extends 'users/userhome1.html' %}
+{% block body %}
+
+    <!-- Corrected Bootstrap CSS and JS links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            background: #ddd;
+            min-height: 100vh;
+            display: flex;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .title {
+            margin-bottom: 5vh;
+        }
+
+        .card {
+            margin: auto;
+            max-width: 950px;
+            width: 90%;
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 1rem;
+            border: transparent;
+        }
+
+        @media(max-width: 767px) {
+            .card {
+                margin: 3vh auto;
+            }
+        }
+
+        .cart {
+            background-color: #fff;
+            padding: 4vh 5vh;
+            border-bottom-left-radius: 1rem;
+            border-top-left-radius: 1rem;
+        }
+
+        @media(max-width: 767px) {
+            .cart {
+                padding: 4vh;
+                border-bottom-left-radius: unset;
+                border-top-right-radius: 1rem;
+            }
+        }
+
+        .summary {
+            background-color: #ddd;
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            padding: 4vh;
+            color: rgb(65, 65, 65);
+        }
+
+        @media(max-width: 767px) {
+            .summary {
+                border-top-right-radius: unset;
+                border-bottom-left-radius: 1rem;
+            }
+        }
+
+        .summary .col-2, .summary .col-10 {
+            padding: 0;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .title b {
+            font-size: 1.5rem;
+        }
+
+        .main {
+            margin: 0;
+            padding: 2vh 0;
+            width: 100%;
+        }
+
+        .col-2, .col {
+            padding: 0 1vh;
+        }
+
+        .close {
+            margin-left: auto;
+            font-size: 0.7rem;
+        }
+
+        img {
+            width: 3.5rem;
+        }
+
+        .back-to-shop {
+            margin-top: 4.5rem;
+        }
+
+        h5 {
+            margin-top: 4vh;
+        }
+
+        hr {
+            margin-top: 1.25rem;
+        }
+
+        form {
+            padding: 2vh 0;
+        }
+
+        select {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 1.5vh 1vh;
+            margin-bottom: 4vh;
+            outline: none;
+            width: 100%;
+            background-color: rgb(247, 247, 247);
+        }
+
+        input {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 1vh;
+            margin-bottom: 4vh;
+            outline: none;
+            width: 100%;
+            background-color: rgb(247, 247, 247);
+        }
+
+        input:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        .btn {
+            background-color: #000;
+            border-color: #000;
+            color: white;
+            width: 100%;
+            font-size: 0.7rem;
+            margin-top: 4vh;
+            padding: 1vh;
+            border-radius: 0;
+        }
+
+        .btn:focus {
+            box-shadow: none;
+            outline: none;
+            color: white;
+            transition: none;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+
+        a {
+            color: black;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+        #code {
+            background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: center;
+        }
+        .dropdown-item img {
+        vertical-align: middle; /* Aligns the image vertically */
+        }
+
+
+    </style>
+    <style>
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Full width */
+    margin: 10px 0;
+}
+
+.selected {
+    background-color: #f0f8ff;
+    border: 1px solid #ccc;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.selected:hover {
+    border-color: #4CAF50; /* Change border color on hover */
+}
+
+.options {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+    width: 100%;
+    max-height: 150px; /* Limit height */
+    overflow-y: auto; /* Scroll if too many options */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.option:hover {
+    background-color: #f1f1f1; /* Highlight option on hover */
+}
+
+.option-img {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    margin-right: 10px;
+}
+
+.selected-img {
+    width: 20px; /* Size for selected image */
+    height: 20px; /* Size for selected image */
+    margin-right: 5px;
+}
+
+/* Add transition for smoother appearance */
+.options {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+button {
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049; /* Darken button on hover */
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selected = document.querySelector('.selected');
+    const optionsContainer = document.querySelector('.options');
+    const optionsList = document.querySelectorAll('.option');
+    const hiddenInput = document.getElementById('employee-id');
+
+    selected.addEventListener('click', function() {
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    optionsList.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            const selectedText = this.innerText;
+
+            // Update the visible selected item
+            selected.innerHTML = `<img src="${this.querySelector('.option-img').src}" class="selected-img"> ${selectedText}`;
+
+            // Set the hidden input value for form submission
+            hiddenInput.value = value;
+
+            // Close the options
+            optionsContainer.style.display = 'none';
+        });
+    });
+
+    // Close options when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!selected.contains(e.target)) {
+            optionsContainer.style.display = 'none';
+        }
+    });
+});
+</script>
+</head>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="../index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+        <h1 class="sitename">HL</h1>
+        <span>.</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+
+          <li><a href="#hero" class="active">Home<br></a></li>
+
+          <li><a href="/login" class="active">Logout<br></a></li>
+            <li> <a href="/view_cart"  ><i class="fa fa-shopping-cart" style="font-size:30;color:white"></i></a></li>
+          <li><a href="/usrviewpro" class="active"><img src="{{ request.session.image }}" width="50" height="50" class="round-image" /> <br></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<body>
+
+    <div class="card">
+        <div class="row">
+            <!-- Shopping Cart Section -->
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Cart</b></h4></div>
+                        <div class="col align-self-center text-right text-muted"></div>
+                    </div>
+                </div>
+
+
+                {% if cart_items %}
+                <!-- First Product -->
+                {% for i in cart_items %}
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+{#                        <div class="col-2"><img class="img-fluid" src="{{ i.SERVICE.photo.url }}" height="70" width="70" alt="Shirt"></div>#}
+                        <div class="col-2"><a href="{{ i.SERVICE.photo.url }}"><img src="{{ i.SERVICE.photo.url }}" height="50" width="50"></a> </div>
+                        <div class="col">
+                            <div class="row text-muted">{{ i.SERVICE.name }}</div>
+                            <div class="row">{{ i.BOOKING_MASTER.date }}</div>
+                        </div>
+
+                        <div class="col">₹ {{ i.SERVICE.cost }}<span class="close"></span></div>
+                        <div class="col"> {{ i.SERVICE.Duration }} Minutes
+{#                            <span class="close"><a href="/delete_cart/{{ i.id }}">&#10005;</a></span>#}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                    <span style="font-size: 30px;text-align: center">No Item in cart</span>
+            {% endif %}
+
+
+
+                <div class="back-to-shop">
+    <a href="javascript:void(0);" onclick="window.history.back();">&larr; Back to shop</a>
+
+</div>
+
+            </div>
+
+            <!-- Summary Section -->
+            <div class="col-md-4 summary">
+    <div><h5><b>Summary</b></h5></div>
+    <hr>
+    <div class="row">
+    </div>
+
+
+
+
+
+
+    <!-- Start of the form -->
+    <form method="POST" action="/purchase_product1">
+    {% csrf_token %}
+    <!-- Hidden input for the booking_sub_id -->
+    <input type="hidden" name="booking_sub_id" value="{{ cart_master.id }}">
+
+    <!-- Employee selection and appointment time fields here -->
+    <label for="employee-id">Select Employee</label>
+    <select name="employee" id="employee-id">
+    <option value="">-----select-----</option>
+        {% for employee in emp %}
+            <option value="{{ employee.id }}">{{ employee.name }}</option>
+        {% endfor %}
+    </select>
+    <img id="photo" alt="Employee Photo">
+    <p id="name"></p>
+    <p id="exp"></p>
+    <p id="lan"></p>
+
+    <label for="from_time">Select Date</label>
+    <input type="date" name="date" id="date" min="{{ d }}" required>
+
+    <div id="timeslot">
+
+    </div>
+    <input type="hidden" value="{{ total_hours }}" id="th">
+    <input type="hidden" value="{{ remaining_minutes }}" id="tm">
+    Total Hours : {{ total_hours }} Hr. {{ remaining_minutes }} Min<br><br>
+
+    Total : {{ total }}<br><br>
+    <button type="submit" class="btn btn-primary">Book Now</button>
+    </form>
+
+
+
+
+
+
+
+
+
+
+                <!-- End of form -->
+</div>
+
+        </div>
+    </div>
+
+</body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+            document.getElementById("photo").style.visibility = "hidden";
+
+  $("#employee-id").change(function(){
+      var emid=$(this).val()
+{#    alert(emid);#}
+
+     $.ajax({
+            url: "/jquryemployee_view/"+emid,
+            type: "GET",
+            data: {
+
+
+            },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function(dat) {
+
+            document.getElementById("photo").style.visibility = "visible";
+                n2=dat["photo"]
+                n1=dat["name"]
+                ex=dat["expe"]
+                la=dat["lang"]
+                      $("#photo").attr("src", n2);
+                     $("#name").html("Name :"+n1)
+                     $("#exp").html("Experince :" +
+                         ""+ex)
+                     $("#lan").html(la)
+
+//{#                alert('success');#}
+{#                $("#textfield").val("");#}
+
+            },
+            error: function(ts) {
+//{#                alert(ts);#}
+            }
+        });
+
+
+
+  });
+
+
+   // Function to handle date selection
+        $("#date").change(function() {
+            var selectedDate = $(this).val();
+            var empId = $("#employee-id").val();
+            var th = $("#th").val();
+            var tm = $("#tm").val();
+
+            if (empId) { // Check if an employee is selected
+                $.ajax({
+                    url: "/get_timeslots_for_date",
+                    type: "GET",
+                    data: {
+                        "date": selectedDate,
+                        "employee_id": empId,
+                        "th": th,
+                        "tm": tm,
+                    },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        var timeslotDiv = $("#timeslot");
+                        timeslotDiv.empty(); // Clear previous timeslots
+
+                        if (data.timeslots.length) {
+                            data.timeslots.forEach(function(slot) {
+                                timeslotDiv.append(`<table class="table"><tr><td><input type="radio" name="ts" value="${slot}" name="ts"></input></td><td>${slot}</td></tr></table>`);
+                            });
+                        } else {
+                            timeslotDiv.append("<p>No available timeslots for this date.</p>");
+                        }
+                    },
+                    error: function(ts) {
+                        console.log("Error fetching timeslots.");
+                    }
+                });
+            } else {
+                alert("Please select an employee first.");
+            }
+        });
+
+
+
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'users/userhome1.html' %}
+{% block body %}
+
+<!-- Service Details Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{ service.photo.url }}" class="img-fluid" alt="{{ service.name }}">
+        </div>
+        <div class="col-lg-6">
+            <h2>{{ service.name }}</h2>
+            <p>{{ service.description }}</p>
+            <p class="price">Price: ₹ {{ service.cost }}</p>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="buttons mt-5 text-center">
+{#                    <button type="submit" class="btn btn-confirm-booking mb-3">Confirm Booking</button>#}
+                    <a href="/view_cart1/{{ service.id }}" class="btn btn-confirm-booking mb-3">Confirm Booking</a>
+                    <a href="/add_to_cart/{{ service.id }}" class="btn btn-add-to-cart">Add to Cart</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Button container styling */
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Button base styling */
+    .btn {
+        width: 60%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #000;
+        transition: background-color 0.3s, color 0.3s;
+        border: 2px solid;
+        margin-bottom: 10px;
+    }
+
+    /* Transparent styles for each button */
+    .btn-confirm-booking {
+        border-color: #28a745;
+        color: #28a745;
+        background-color: transparent;
+    }
+
+    .btn-add-to-cart {
+        border-color: #007bff;
+        color: #007bff;
+        background-color: transparent;
+    }
+
+    /* Hover effects for each button */
+    .btn-confirm-booking:hover {
+        background-color: #28a745;
+        color: #ffffff;
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #007bff;
+        color: #ffffff;
+    }
+</style>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

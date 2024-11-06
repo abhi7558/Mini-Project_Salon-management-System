@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Template</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header, .footer {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0;
+        }
+        .bill-details {
+            margin-bottom: 30px;
+        }
+        .bill-details p {
+            margin: 5px 0;
+        }
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .table .total {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .total-amount {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-container">
+<div id="p">
+    <!-- Header -->
+    <div class="header">
+        <h1>HairLuxee</h1>
+        <p>MG Road Pattambi, Palakkad , Kerala, 679303</p>
+        <p>Phone: +91 8129530456 | Email: hairluxee@gmail.com   </p>
+    </div>
+
+    <!-- Bill Details -->
+    <div class="bill-details">
+        <p><strong>Bill To:</strong> {{ id }}</p>
+        <p><strong>Date:</strong> {{ d }}</p>
+
+    </div>
+
+    <!-- Table of Services/Items -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example row; replace with dynamic data as needed -->
+            {% for i in items %}
+            <tr>
+                <td>{{ i.SERVICE.name }}</td>
+                <td>{{ i.SERVICE.description }}</td>
+                <td>{{ i.price }}</td>
+
+            </tr>
+           {% endfor %}
+            <!-- End of dynamic data rows -->
+
+            <tr>
+                <td colspan="2" class="text-right total">Total</td>
+                <td>{{ tt }}.00</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Thank you for your business!</p>
+        <p> <input type="button" value="Print" onclick="printDiv()" class="btn btn-primary"></p>
+    </div>
+</div>
+
+
+<script>
+        function printDiv() {
+            let divContents = document.getElementById("p").innerHTML;
+            let printWindow = window.open('', '', 'height=500, width=500');
+            printWindow.document.open();
+            printWindow.document.write(`
+                <html>
+
+                <head>
+                    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header, .footer {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0;
+        }
+        .bill-details {
+            margin-bottom: 30px;
+        }
+        .bill-details p {
+            margin: 5px 0;
+        }
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .table .total {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .total-amount {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        h1 { color: #333; }
+                    </style>
+                </head>
+                <body>
+
+                    ${divContents}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+</body>
+</html>

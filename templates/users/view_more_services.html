@@ -1,0 +1,102 @@
+{% extends 'users/userhome1.html' %}
+{% load static %}
+{% block body %}
+    <div class="container">
+        <br><br>
+
+        <div class="row gy-4">
+            {% for i in types %}
+                <div class="col-md-4"> <!-- 3 columns per row on medium screens -->
+                    <div class="card border-0 rounded shadow">
+                        <div class="card-body text-center">
+                            <img src="{{ i.photo.url }}" alt="Service Image" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h4 class="card-title"><b>{{ i.name }}</b></h4>
+                            <p class="card-text">{{ i.description }}</p>
+                            <p class="card-text"><b>Price:</b> {{ i.cost }}</p>
+                            <p class="card-text"><b>Category:</b> {{ i.category }}</p>
+                            <p class="card-text"><b>Type:</b> {{ i.type }}</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="/deleteservices/{{ i.id }}#stats"
+                                   class="btn btn-transparent btn-sm mx-2 remove-service-btn">
+                                    REMOVE SERVICE
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        /* Styles for Add Service Button */
+        .add-service-btn {
+            background-color: transparent; /* Make the button transparent */
+            color: #28a745; /* Bootstrap green color for text */
+            border: 2px solid #28a745; /* Outline border */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+
+        .add-service-btn:hover {
+            background-color: #28a745; /* Change background color to green on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Styles for Remove Service Button */
+        .remove-service-btn {
+            background-color: transparent; /* Make the button transparent */
+            color: #dc3545; /* Bootstrap red color for text */
+            border: 2px solid #dc3545; /* Outline border */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+
+        .remove-service-btn:hover {
+            background-color: #dc3545; /* Change background color to red on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Styling for Service Cards */
+        .card {
+            transition: transform 0.3s ease;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        .card-body {
+            background-color: #f8f9fa; /* Light background for contrast */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-text {
+            color: #666;
+        }
+
+        .btn {
+            padding: 8px 16px; /* Button padding */
+            font-size: 0.875rem; /* Slightly smaller font size */
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .btn {
+                width: 100%; /* Full width on smaller screens */
+                margin-bottom: 10px; /* Space between buttons */
+            }
+            .col-md-4 {
+                flex: 0 0 100%; /* Full width for cards on small screens */
+                max-width: 100%; /* Full width for cards on small screens */
+            }
+        }
+    </style>
+{% endblock %}

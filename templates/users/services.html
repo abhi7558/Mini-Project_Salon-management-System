@@ -1,0 +1,163 @@
+{% extends 'users/userhome1.html' %}
+{% load static %}
+
+{% block body %}
+<!-- Portfolio Section -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/services/images/icons/favicon.png"/>
+    <!-- CSS Files -->
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/services/css/main.css">
+</head>
+<body class="animsition">
+
+<!-- Header -->
+<header>
+    <div class="container-menu-desktop">
+        <!-- Topbar -->
+    </div>
+
+    <div class="wrap-header-mobile">
+        <div class="logo-mobile">
+            <a href="index.html"><img src="/static/services/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+        </div>
+
+        <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="sec-banner bg0 p-t-80 p-b-50">
+        <div class="container">
+            <div class="row">
+
+                    <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto" data-type="Men">
+                        <!-- Block1 -->
+                        <div class="block1 wrap-pic-w">
+                            <img src="/media/banner-02.jpg" alt="IMG-BANNER" style="width: 300px; height: 300px; object-fit: cover;">
+                            <a href="/men_services#a" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3" >
+                                <div class="block1-txt-child1 flex-col-l">
+                                    <span class="block1-name ltext-102 trans-04 p-b-8">
+                                        Men
+                                    </span>
+                                    <span class="block1-info stext-102 trans-04">
+                                        Explore
+                                    </span>
+                                </div>
+                                <div class="block1-txt-child2 p-b-4 trans-05">
+                                    <div class="block1-link stext-101 cl0 trans-09">
+                                        Book Now
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto" data-type="Women">
+                        <!-- Block1 -->
+                        <div class="block1 wrap-pic-w">
+                            <img src="/media/banner-01.jpg" alt="IMG-BANNER" style="width: 300px; height: 300px; object-fit: cover;">
+                            <a href="/women_services#a" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3" >
+                                <div class="block1-txt-child1 flex-col-l">
+                                    <span class="block1-name ltext-102 trans-04 p-b-8">
+                                        Women
+                                    </span>
+                                    <span class="block1-info stext-102 trans-04">
+                                        Explore
+                                    </span>
+                                </div>
+                                <div class="block1-txt-child2 p-b-4 trans-05">
+                                    <div class="block1-link stext-101 cl0 trans-09">
+                                        Book Now
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto" data-type="Kids">
+                        <!-- Block1 -->
+                        <div class="block1 wrap-pic-w">
+                            <img src="/media/banner-03.jpg" alt="IMG-BANNER" style="width: 300px; height: 300px; object-fit: cover;">
+                            <a href="/kids_services#a" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3" >
+                                <div class="block1-txt-child1 flex-col-l">
+                                    <span class="block1-name ltext-102 trans-04 p-b-8">
+                                        Kids
+                                    </span>
+                                    <span class="block1-info stext-102 trans-04">
+                                        Explore
+                                    </span>
+                                </div>
+                                <div class="block1-txt-child2 p-b-4 trans-05">
+                                    <div class="block1-link stext-101 cl0 trans-09">
+                                        Book Now
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Section to display filtered services -->
+    <div id="filtered-services" class="container" style="display:none;">
+        <h2>Selected Services</h2>
+        <div id="services-content">
+            {% for i in jj %}
+             <div class="service-item">#}
+                <h3>{{ j.type }}</h3>
+                <img src="{{ j.photo.url }}" alt="{{ j.type }}" style="width: 300px; height: 300px; object-fit: cover;">
+                <p>Details about {{ j.type }} services...</p>
+                <p> {{ j.description }}</p>
+             </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <hr>
+    <!-- JavaScript Files -->
+    <script src="/static/services/vendor/jquery/jquery-3.2.1.min.js"></script>
+{
+
+    <!-- Additional JavaScript Files -->
+    <script src="/static/services/vendor/animsition/js/animsition.min.js"></script>
+    <script src="/static/services/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/services/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/services/vendor/select2/select2.min.js"></script>
+    <script src="/static/services/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/static/services/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="/static/services/vendor/slick/slick.min.js"></script>
+    <script src="/static/services/js/slick-custom.js"></script>
+    <script src="/static/services/vendor/parallax100/parallax100.js"></script>
+    <script src="/static/services/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script src="/static/services/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="/static/services/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/static/services/js/main.js"></script>
+
+</body>
+</html>
+{% endblock %}

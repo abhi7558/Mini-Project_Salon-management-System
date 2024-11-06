@@ -1,0 +1,148 @@
+{% extends 'admin/adminhome1.html' %}
+{% block body %}
+    <div class="container">
+        <!-- Button section -->
+        <div class="text-center mt-4">
+            <a href="/add_emp#stats" class="btn btn-transparent btn-lg mx-2 add-employee-btn" role="button">
+                ADD EMPLOYEE
+            </a>
+        </div>
+        <br><br>
+
+        <!-- Employee Cards -->
+        <br><br>
+        <div class="row gy-4">
+            {% for i in values %}
+                <div class="col-md-4"> <!-- 3 columns per row on medium screens -->
+                    <div class="card border-0 rounded shadow">
+                        <div class="card-body text-center">
+                            <img src="{{ i.photo.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h4 class="card-title"><b>{{ i.name }}</b></h4>
+                            <p class="card-text">{{ i.phone }}</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="/edit_emp/{{ i.id }}#stats" class="btn btn-transparent btn-sm mx-2 edit-employee-btn">
+                                    EDIT EMPLOYEE
+                                </a>
+                                <a href="/delete/{{ i.id }}#stats"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#confirmDeleteModal"
+                                   data-employee-id="{{ i.id }}"
+                                   class="btn btn-transparent btn-sm mx-2 remove-employee-btn delete-employee-btn">
+                                    REMOVE EMPLOYEE
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Modal for delete confirmation -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to remove this employee?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn toast-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="deleteConfirmBtn" class="btn toast-delete-btn">Yes, Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-employee-btn');
+        const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const employeeId = this.getAttribute('data-employee-id');
+                deleteConfirmBtn.href = `/delete/${employeeId}#stats`; // Set the href for confirmation button
+            });
+        });
+    });
+    </script>
+
+    <style>
+        /* General button styling */
+        .btn {
+            padding: 5px 10px; /* Smaller padding for buttons */
+            font-size: 0.9rem; /* Smaller font size */
+            background-color: transparent; /* Make the button transparent */
+            border: 2px solid transparent; /* Transparent border */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+        }
+
+        /* Add Employee button */
+        .add-employee-btn {
+            color: #28a745; /* Bootstrap green color for text */
+            border-color: #28a745; /* Green border */
+        }
+        .add-employee-btn:hover {
+            background-color: #28a745; /* Change background color to green on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Edit Employee button */
+        .edit-employee-btn {
+            color: #007bff; /* Bootstrap blue color for text */
+            border-color: #007bff; /* Blue border */
+        }
+        .edit-employee-btn:hover {
+            background-color: #007bff; /* Change background color to blue on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Remove Employee button */
+        .remove-employee-btn {
+            color: #dc3545; /* Bootstrap red color for text */
+            border-color: #dc3545; /* Red border */
+        }
+        .remove-employee-btn:hover {
+            background-color: #dc3545; /* Change background color to red on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Styling for Employee Cards */
+        .card {
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Toast notification button styles */
+        .toast-cancel-btn {
+            color: black;
+            border: 2px solid transparent;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .toast-delete-btn {
+            color: black;
+            border: 2px solid transparent;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Hover effects for toast buttons */
+        .toast-cancel-btn:hover {
+            background-color: yellow;
+            color: black;
+        }
+
+        .toast-delete-btn:hover {
+            background-color: red;
+            color: white;
+        }
+    </style>
+{% endblock %}

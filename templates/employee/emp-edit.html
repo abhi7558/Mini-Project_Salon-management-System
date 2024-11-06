@@ -1,0 +1,104 @@
+{% extends 'employee/index.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Edit Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7); /* Dark transparent black background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); /* Stronger shadow */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            color: white; /* White label text */
+            font-weight: bold;
+        }
+        td {
+            border-bottom: none; /* Remove borders between table rows */
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+            color: #fff; /* White text */
+        }
+        input[type="text"]:focus, input[type="file"]:focus {
+            border-color: #4CAF50; /* Green border on focus */
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 15px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/edit_empp1" method="post" enctype="multipart/form-data" name="form1" id="form1">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" name="textfield" value="{{ i.name }}" /></td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td><input type="file" name="file" /></td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td><input type="text" name="textfield2" value="{{ i.phone }}" /></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><input type="text" name="email" value="{{ i.email }}" /></td>
+                </tr>
+                <tr>
+                    <th>Experience</th>
+                    <td><input type="text" name="textfield3" value="{{ i.experience }}" /></td>
+                </tr>
+                <tr>
+                    <th>Language</th>
+                    <td><input type="text" name="textfield4" value="{{ i.language }}" /></td>
+                </tr>
+            </table>
+            <p><input type="submit" name="submit" value="Update" /></p>
+        </form>
+    </div>
+</body>
+{% endblock %}

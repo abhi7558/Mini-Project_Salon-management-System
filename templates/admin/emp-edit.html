@@ -1,0 +1,121 @@
+{% extends 'admin/adminhome.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Edit Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/login/images/hero-bg.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7); /* Black with transparency */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff; /* Text color for better visibility */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            border-bottom: none; /* Remove horizontal lines */
+        }
+        th {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Set field names to white */
+        td:first-child {
+            color: white; /* Field name colors to white */
+        }
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* Add custom styles for select options */
+        select {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white; /* Default text color for the select field */
+        }
+        option {
+            background-color: white; /* Background color for options */
+            color: black; /* Text color for options */
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url 'edit_empp' %}" method="post" enctype="multipart/form-data" name="form1" id="form1">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="textfield" value="{{ i.name }}" /></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="file" /></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><input type="text" name="textfield2" value="{{ i.phone }}" /></td>
+            </tr>
+            <tr>
+                <td>Experience</td>
+                <td><input type="text" name="textfield3" value="{{ i.experience }}" /></td>
+            </tr>
+            <tr>
+                <td>Employee type</td>
+                <td>
+                    <select name="Employee_type">
+                        <option value="Trainee" {% if i.Employee_type == "Trainee" %} selected{% endif %}>Trainee</option>
+                        <option value="Senior Hairstylist" {% if i.Employee_type == "Senior Hairstylist" %} selected{% endif %}>Senior Hairstylist</option>
+                        <option value="Hairstylist" {% if i.Employee_type == "Hairstylist" %} selected{% endif %}>Hairstylist</option>
+                        <option value="Skincare Consultant" {% if i.Employee_type == "Skincare Consultant" %} selected{% endif %}>Skincare Consultant</option>
+                        <option value="Makeup Artist" {% if i.Employee_type == "Makeup Artist" %} selected{% endif %}>Makeup Artist</option>
+                        <option value="Nail Technician" {% if i.Employee_type == "Nail Technician" %} selected{% endif %}>Nail Technician</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td><input type="text" name="textfield4" value="{{ i.language }}" /></td>
+            </tr>
+        </table>
+        <p><input type="submit" name="submit" value="Update" /></p>
+    </form>
+</body>
+{% endblock %}

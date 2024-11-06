@@ -1,0 +1,246 @@
+{#<!doctype html>#}
+<html lang="en">
+{% load static %}
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="../static/login/css/style.css">
+      <style>
+          .header {
+  background-color: rgba(0, 0, 0, 0); /* Fully transparent background */
+  box-shadow: none; /* Remove any shadow for a clean transparent look */
+  padding: 20px 0; /* Adjust padding to your preference */
+  position: fixed; /* Keeps the navbar fixed at the top */
+  width: 100%;
+  z-index: 1000; /* Ensures it stays above other content */
+}
+
+.header h1 {
+  color: white; /* Keep the text visible */
+  font-size: 30px; /* Adjust the size of the title/logo */
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Adjust the text style within the navbar */
+.header a {
+  color: white; /* Make text and links visible against the transparent background */
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #ddd; /* Add a hover effect for better user experience */
+}
+  .highlight-text{
+        color: #f5f6d9 ;
+    }
+    .bold-text{
+        color: #e4e862;
+
+    }
+      </style>
+
+
+	</head>
+	<body class="img js-fullheight" style="background-image: url(../static/login/images/hero-bg.jpg);">
+<header class="header">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-md-6 col-lg-4">
+         <h1>
+  <span class="bold-text">H</span><span class="highlight-text">L</span><span>.</span>
+</h1>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<form action="logincode" method="post" class="signin-form">
+                <span style="color: white;font-size: 20px;">
+                    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+                </span>
+
+		      		<div class="form-group">
+		      			<input type="text" name="mail"class="form-control" placeholder="Username/Email" required>
+		      		</div>
+	            <div class="form-group">
+	              <input id="password-field" type="password"name="Password" class="form-control" placeholder="Password" required>
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	            </div>
+	            <div class="form-group">
+	          <button type="submit" class="form-control btn btn-primary submit px-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Sign In</button>
+
+	            </div>
+	            <div class="form-group d-md-flex">
+	            	<div class="w-50">
+		            	<label class="checkbox-wrap checkbox-primary">Remember Me
+									  <input type="checkbox" checked>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								<div class="w-50 text-md-right">
+									<a href="/forgot_password" style="color: #fff">Forgot Password</a>
+								</div>
+	            </div>
+	          </form>
+	          <p class="w-100 text-center">&mdash; Dont have an Account ?&mdash;</p>
+	          <div class="social d-flex text-center">
+	          	<a href="registration" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span>  SignUp</a>
+
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+        <!-- Modal for delete confirmation -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to remove this employee?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn toast-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="deleteConfirmBtn" class="btn toast-delete-btn">Yes, Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-employee-btn');
+        const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const employeeId = this.getAttribute('data-employee-id');
+                deleteConfirmBtn.href = `/delete/${employeeId}#stats`; // Set the href for confirmation button
+            });
+        });
+    });
+    </script>
+
+    <style>
+        /* General button styling */
+        .btn {
+            padding: 5px 10px; /* Smaller padding for buttons */
+            font-size: 0.9rem; /* Smaller font size */
+            background-color: transparent; /* Make the button transparent */
+            border: 2px solid transparent; /* Transparent border */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+        }
+
+        /* Add Employee button */
+        .add-employee-btn {
+            color: #28a745; /* Bootstrap green color for text */
+            border-color: #28a745; /* Green border */
+        }
+        .add-employee-btn:hover {
+            background-color: #28a745; /* Change background color to green on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Edit Employee button */
+        .edit-employee-btn {
+            color: #007bff; /* Bootstrap blue color for text */
+            border-color: #007bff; /* Blue border */
+        }
+        .edit-employee-btn:hover {
+            background-color: #007bff; /* Change background color to blue on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Remove Employee button */
+        .remove-employee-btn {
+            color: #dc3545; /* Bootstrap red color for text */
+            border-color: #dc3545; /* Red border */
+        }
+        .remove-employee-btn:hover {
+            background-color: #dc3545; /* Change background color to red on hover */
+            color: #fff; /* Change text color to white on hover */
+        }
+
+        /* Styling for Employee Cards */
+        .card {
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Toast notification button styles */
+        .toast-cancel-btn {
+            color: black;
+            border: 2px solid transparent;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .toast-delete-btn {
+            color: black;
+            border: 2px solid transparent;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Hover effects for toast buttons */
+        .toast-cancel-btn:hover {
+            background-color: yellow;
+            color: black;
+        }
+
+        .toast-delete-btn:hover {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+
+	<script src="../static/login/js/jquery.min.js"></script>
+  <script src="../static/login/js/popper.js"></script>
+  <script src="../static/login/js/bootstrap.min.js"></script>
+  <script src="../static/login/js/main.js"></script>
+
+	</body>
+</html>
+

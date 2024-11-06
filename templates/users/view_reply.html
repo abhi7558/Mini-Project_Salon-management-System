@@ -1,0 +1,193 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Complaint Replies</title>#}
+{#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">#}
+{##}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            background-color: #f4f4f4;#}
+{#            padding: 20px;#}
+{#        }#}
+{#        .container {#}
+{#            width: 90%;#}
+{#            max-width: 800px;#}
+{#            margin: 20px auto;#}
+{#        }#}
+{#        h1 {#}
+{#            margin-bottom: 20px;#}
+{#            color: #333;#}
+{#            font-size: 2rem;#}
+{#            text-align: center;#}
+{#        }#}
+{#        .complaint-card {#}
+{#            background-color: #fff;#}
+{#            padding: 20px;#}
+{#            border-radius: 5px;#}
+{#            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{#        .complaint-card h3 {#}
+{#            color: #333;#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{#        .complaint-card p {#}
+{#            color: #555;#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{#        .reply {#}
+{#            padding: 10px;#}
+{#            background-color: #f9f9f9;#}
+{#            border-left: 4px solid #007bff;#}
+{#            margin-top: 10px;#}
+{#            border-radius: 5px;#}
+{#        }#}
+{#        .status {#}
+{#            font-weight: bold;#}
+{#            padding: 5px 10px;#}
+{#            border-radius: 12px;#}
+{#            color: #fff;#}
+{#            display: inline-block;#}
+{#        }#}
+{#        .status.resolved {#}
+{#            background-color: #28a745;#}
+{#        }#}
+{#        .status.pending {#}
+{#            background-color: #ffc107;#}
+{#        }#}
+{#    </style>#}
+{#    <style>#}
+{#        .round-image {#}
+{#            width: 100px; /* Set the desired size */#}
+{#            height: 100px; /* Ensure height and width are equal */#}
+{#            border-radius: 50%; /* Make the image round */#}
+{#            object-fit: cover; /* Ensures image doesn't stretch */#}
+{#            border: 2px solid #333; /* Optional: Add a border */#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <div class="container">#}
+{#        <h1>Your Complaints</h1>#}
+{##}
+{#        <!-- Complaint Card -->#}
+{#        {% for complaint in complaints %}#}
+{#        <div class="complaint-card">#}
+{#            <h3>Complaint ID: {{ complaint.id }}</h3>#}
+{#              <p>{{ complaint.BOOKING.EMPLOYEE.name }}<img src="{{ complaint.BOOKING.EMPLOYEE.photo.url }}" alt="Employee 1" class="round-image"></p>#}
+{#                        #}
+{#            <p><strong>Date:</strong> {{ complaint.date }}</p>#}
+{#            <p><strong>Complaint:</strong> {{ complaint.Complaint }}</p>#}
+{#            <p class="reply"><strong>Admin Reply:</strong> {{ complaint.Reply }}</p>#}
+{##}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Replies</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .complaint-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .complaint-details {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .complaint-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .complaint-card p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .reply {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 12px;
+            color: #fff;
+            display: inline-block;
+        }
+        .status.resolved {
+            background-color: #28a745;
+        }
+        .status.pending {
+            background-color: #ffc107;
+        }
+        .round-image {
+            width: 100px; /* Set the desired size */
+            height: 100px; /* Ensure height and width are equal */
+            border-radius: 50%; /* Make the image round */
+            object-fit: cover; /* Ensures image doesn't stretch */
+            border: 2px solid #333; /* Optional: Add a border */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Complaints</h1>
+
+        <!-- Complaint Card -->
+        {% for complaint in complaints %}
+        <div class="complaint-card">
+            <!-- Complaint Details -->
+            <div class="complaint-details">
+                <h3>Complaint ID: {{ complaint.id }}</h3>
+                <p><strong>Employee:</strong> {{ complaint.BOOKING.EMPLOYEE.name }}</p>
+                <p><strong>Date:</strong> {{ complaint.date }}</p>
+                <p><strong>Complaint:</strong> {{ complaint.Complaint }}</p>
+                <p class="reply"><strong>Admin Reply:</strong> {{ complaint.Reply }}</p>
+            </div>
+
+            <!-- Employee Image -->
+            <div>
+                <img src="{{ complaint.BOOKING.EMPLOYEE.photo.url }}" alt="Employee Photo" class="round-image">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

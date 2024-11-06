@@ -1,0 +1,243 @@
+{% extends 'users/userhome1.html' %}
+{% block body %}
+
+
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Services</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    /* Navbar styling */
+    .header {
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        padding: 2px 0;
+        height: 80px;
+        display: flex;
+        justify-content: center; /* Centering content horizontally */
+        align-items: center; /* Aligning items vertically */
+    }
+
+    /* HL logo styling */
+    .header h1 {
+        color: white;
+        font-size: 24px;
+        font-family: 'Roboto', sans-serif;
+        position: absolute;
+        left: 20px; /* Keeping the logo on the left */
+    }
+
+    /* New "MEN" heading styling in the navbar */
+    .header h2 {
+        color: #e4e862;
+        font-size: 36px;
+        font-family: 'Roboto', sans-serif;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow */
+        transition: all 0.5s ease-in-out;
+    }
+
+    /* Add hover animation */
+    .header h2:hover {
+        transform: scale(1.1); /* Slightly enlarge on hover */
+        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
+    }
+
+    /* Body and content styling */
+    body {
+        background-color: #f8f9fa;
+        padding-top: 60px;
+    }
+
+    /* Card styling */
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-width: 300px; /* Fixed card width */
+        margin: 0 auto; /* Center the cards */
+        height: auto; /* Set height to auto so card grows with content */
+        flex-grow: 1;
+    }
+
+    /* Hover effect on card */
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Fixed card image size */
+    .card-img-top {
+        height: 250px; /* Fixed height for image */
+        width: 100%; /* Ensure the image spans full width */
+        object-fit: cover; /* Ensures image covers the space without stretching */
+        border-bottom: 5px solid #4CAF50; /* Green border below image */
+    }
+
+    /* Card body content */
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px;
+        text-align: center;
+        flex-grow: 1;
+        height: 100%; /* Ensures the body fills the card */
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    /* Price styling */
+    .price {
+        font-size: 1.1rem;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        background-color: transparent;
+        border: 2px solid #4CAF50;
+        color: #4CAF50;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+        margin-top: auto; /* Ensure button stays at the bottom of the card */
+        text-decoration: none; /* Remove underline */
+    }
+
+    /* Button hover effect */
+    .btn-primary:hover {
+        background-color: #FF6347; /* Tomato color on hover */
+        border-color: #FF6347;
+        color: white;
+        text-decoration: none; /* Ensure no underline on hover */
+    }
+
+    /* Ensure cards are grid-based, 4 per row */
+    .container .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* Use col-lg-3 for 4 columns in large screens */
+    .col-lg-3, .col-md-6, .col-sm-12 {
+        flex: 0 0 25%; /* Ensure 4 cards per row on large screens (25% width) */
+    }
+
+    /* Adjust the number of cards per row for smaller screens */
+    @media (max-width: 1024px) {
+        .col-md-6 {
+            flex: 0 0 50%; /* 2 cards per row on medium screens */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-sm-12 {
+            flex: 0 0 100%; /* 1 card per row on small screens */
+        }
+    }
+
+    /* Margin for spacing between cards */
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+    .highlight-text{
+        color: #f5f6d9 ;
+    }
+    .bold-text{
+        color: #e4e862;
+
+    }
+</style>
+
+</head>
+
+<body>
+
+    <!-- Fixed Navbar -->
+{#    <header class="header">#}
+{#        <div class="container">#}
+{#            <!-- "HL" remains unchanged -->#}
+{#            <h1>#}
+{#                <span class="bold-text">H</span><span class="highlight-text">L</span><span>.</span>#}
+{#            </h1>#}
+{#            <!-- New heading for the navbar -->#}
+{#            <h2 align="center">MEN</h2> <!-- Updated heading for the "MEN" in the navbar -->#}
+{#        </div>#}
+{#    </header>#}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+<div class="container">
+            <!-- "HL" remains unchanged -->
+
+            <!-- New heading for the navbar -->
+            <h2 align="center">MEN</h2> <!-- Updated heading for the "MEN" in the navbar -->
+        </div>
+    <!-- Main Content Section for Men's Services -->
+    <div class="container mt-5">
+        <div class="row"><br><br>
+            <!-- Loop over the services passed from the view -->
+            {% for service in services %}
+
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <div class="card h-100">
+                    <img src="{{ service.photo.url }}" class="card-img-top" alt="{{ service.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ service.name }}</h5>
+                        <p class="card-text">{{ service.description }}</p>
+                        <p class="price">RS:{{ service.cost }}</p>
+                        <p class="card-text"><b>Duration:</b> {{ service.t }}</p>
+                        <table>
+                            <tr>
+                                <td><label> <a href="/book_service/{{ service.id }}#a" class="btn btn-primary">Book Now</a></label> </td>
+                                <td> <a href="/add_to_cart/{{ service.id }}" class="btn btn-primary"><i class="fa fa-shopping-cart" style="font-size:40;color:green"></i></a></td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+{% endblock %}

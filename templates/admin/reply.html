@@ -1,0 +1,87 @@
+{% extends 'admin/adminhome.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reply Form</title>
+    <style>
+        /* Centering Container */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Adjust for header/footer space */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            max-width: 400px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Elements Styling */
+        th {
+            text-align: left;
+        }
+
+        /* Textarea Styling */
+        textarea {
+            width: 100%;
+            padding: 12px;
+            resize: vertical;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #f9fafb;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Submit Button Styling */
+        input[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <form method="post" action="/admin_send_reply_post">{% csrf_token %}
+        <table>
+            <tr>
+                <th><textarea placeholder="Reply" name="reply" rows="4" required></textarea></th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" value="Send Reply">
+                    <input type="hidden" value="{{ data.id }}" name="id">
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
+{% endblock %}
